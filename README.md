@@ -11,7 +11,7 @@
 
 ### Initialize
 ```typescript
-import { Zonos } from "https://raw.githubusercontent.com/zonos/zonos_deno_module/main/mod.ts";
+import { Zonos } from "https://deno.land/x/zonos_api/mod.ts";
 
 const zonos = new Zonos({
   account_number: "",
