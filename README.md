@@ -37,13 +37,13 @@ This can also be set directly on the `Zonos` class initialization with: `apiVers
 
 ### Set Cors Proxy 
 
-<i> some endpoints do not support cross origin if called from the front end. In that case you can set a cors proxy to pass the request through.
+<i> some endpoints do not support cross origin if called from the client side. In that case you can set a cors proxy, either your own or https://cors.zonos.com, to pass the request through.
 
 ```typescript
-zonos.setCorsProxy("https://cors.zonos.com/");
+zonos.setCorsProxy("https://cors.zonos.com");
 ```
-This can also be set directly on the `Zonos` class initialization with: `corsProxy: 'https://cors.zonos.com/'`.
-> Note: http://cors.zonos.com/ is not currently live. Use your own cors proxy for now. 
+This can also be set directly on the `Zonos` class initialization with: `corsProxy: 'https://cors.zonos.com'`.
+
 
 <br />
 <br />
@@ -51,10 +51,15 @@ This can also be set directly on the `Zonos` class initialization with: `corsPro
 ### Direct API Call  
 
 ```typescript
+/* 
+    path: string
+    body: JSON
+    method: string
+*/
 zonos.directApiCall(
-    "PATH",
+    "orderDetail",
     { 
-        "json": "body"
+        "key": "value"
     },
     "POST|GET|PUT|DELETE"
 );
