@@ -84,10 +84,13 @@ export class Zonos {
     }
 
     async getOrders(
-        sinceDate?: string,
-        statuses?: boolean,
-        missingMerchantOrderId?: boolean
+        options?: { 
+            sinceDate?: string, 
+            statuses?: boolean, 
+            missingMerchantOrderId?: boolean 
+        }
     ): Promise<any> {
+        const { sinceDate, statuses, missingMerchantOrderId } = options || {};
         return await this.directApiCall("orderNumbers", {
             sinceDate,
             statuses,
