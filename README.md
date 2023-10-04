@@ -115,11 +115,13 @@ Returns a list of orders that have been created from your checkouts.
 ```typescript
 /* 
     sinceDate?: string - yyyyMMdd
+    throughDate?: string - yyyyMMdd,
+    sinceOrderId?: string,
     statuses?: boolean
     missingMerchantOrderId?: boolean
 */
 
-zonos.getOrders({ sinceDate: "2022-01-01", statuses: true, missingMerchantOrderId: true });
+zonos.getOrders({sinceDate: "20230920", throughDate: "20230923", statuses: true});
 ```
 
 <br>
