@@ -8,19 +8,23 @@ import { ZonosCart, ZonosConfig } from "./types.ts";
 export class Zonos {
     constructor(private config: ZonosConfig) {
         if (!config.apiUrl) {
+            const apiVersion = config.apiVersion ?? "2";
+ 
             this.config = {
                 ...config,
-                apiVersion: config.apiVersion ?? "2",
-                apiUrl: `https://api.iglobalstores.com/v${config.apiVersion}`,
+                apiVersion,
+                apiUrl: `https://api.iglobalstores.com/v${apiVersion}`,
             };
         }
     }
 
     private buildApiUrl(): void {
+        const apiVersion = this.config.apiVersion ?? "2";
+ 
         this.config = {
           ...this.config,
-          apiVersion: this.config.apiVersion ?? "2",
-          apiUrl: `https://api.iglobalstores.com/v${this.config.apiVersion}`,
+          apiVersion,
+          apiUrl: `https://api.iglobalstores.com/v${apiVersion}`,
         };
     }
 
@@ -45,22 +49,23 @@ export class Zonos {
         method: string = "POST"
     ): Promise<any> {
         const url: string = this.config.corsProxy ? `${this.config.corsProxy}/${this.config.apiUrl}/${path}` : `${this.config.apiUrl}/${path}`;
+
         try{
-        const apiResponse = await fetch(url, {
-            headers: {
-            "Content-Type": "application/json",
-            },
-            method,
-            body: JSON.stringify({
-            ...body,
-            store: this.config.account_number.toString(),
-            secret: this.config.api_key,
-            }),
-        })
+            const apiResponse = await fetch(url, {
+                headers: {
+                "Content-Type": "application/json",
+                },
+                method,
+                body: JSON.stringify({
+                ...body,
+                store: this.config.account_number.toString(),
+                secret: this.config.api_key,
+                }),
+            })
             .then((result) => result.json())
             .catch((error: any) => {
-            console.log(error);
-            return error;
+                console.log(error);
+                return error;
             });
             return apiResponse;
         } catch (error) {
